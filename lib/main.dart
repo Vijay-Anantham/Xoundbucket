@@ -55,9 +55,9 @@ class _SongListState extends State<SongList> {
             return ListView.builder(
               itemCount: (songs != null) ? songs.length : 0,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text("Song not exist"),
-                  subtitle: Text("Add songs to your library"),
+                return songListTile(
+                  title: ("Song not exist"),
+                  subtitle: ("Add songs to your library"),
                 );
               },
             );

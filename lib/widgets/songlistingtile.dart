@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// The ui is achieved by wrapping the list tile in the conatainer
 class songListTile extends StatelessWidget {
   final String title;
   final String subtitle;
