@@ -8,4 +8,5 @@ class Songs {
 
 class user {
   late String name;
+  late List<Songs> recentlistens;
 }
