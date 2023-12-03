@@ -10,11 +10,12 @@
     - implemented simple songs listing ui ( to be improved)
     - Login page simple ( to be improved)
     - A test db for fetching songs
+    - Connection to spotify using spotify account
 ## Todo
     - Make friends functionality
         - Friends lister
         - Add friends / People on tha app
     - Profiles page implementation
     - Music platform connections
-        - primariy spotify for testing
-    - 
+        - connector for amazon music
+    - Make a make connection page with options
