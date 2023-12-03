@@ -19,3 +19,8 @@
     - services helping functioning of app goes here
     - dp service exist now - not integrated to the add - only placeholder code
 
+## Technologies plan
+    - front end - flutter
+    - backe end - node js
+    - db - mongodb atlas vs postgres (needs lookup)
+
