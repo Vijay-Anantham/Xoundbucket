@@ -45,3 +45,4 @@ app.*.map.json
 
 # Configuration secret information
 /backend/config.json
+/backend/node_modules/
