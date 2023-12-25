@@ -2,17 +2,23 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const config = require('./config.json')
 const SpotifyWebApi = require('spotify-web-api-node');
+const cors = require('cors')
 
 const app = express();
+// FIXME: This has been added to enable communication between internal ports within the system
+// CORS - Cross Origin Resource Sharing
+app.use(cors())
 const PORT = 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 const YOUR_CLIENT_ID = config.API_TOKEN;
 const YOUR_CLIENT_SECRET = config.API_SECRET;
+// TODO: Currently it is local host it has to be hosted somewhere or add redirect to internal application page
 const YOUR_REDIRECT_URI = 'http://localhost:3000/callback';
 
 const spotifyApi = new SpotifyWebApi({
   clientId: YOUR_CLIENT_ID,
   clientSecret: YOUR_CLIENT_SECRET,
+  // FIXME: This redirect uri should be one of the application pages
   redirectUri: YOUR_REDIRECT_URI,
 });
 
@@ -21,6 +27,7 @@ app.get('/', (req, res) => {
   res.redirect(authorizeURL);
 });
 
+// Home end point to get the authorization done
 app.get('/callback', async (req, res) => {
   const { code } = req.query;
   try {
@@ -37,22 +44,29 @@ app.get('/callback', async (req, res) => {
   }
 });
 
+// End point to get the top 5 played tracks from the spotify api
 app.get('/toptracks', async (req, res) => {
   try {
     const topTracksResponse = await spotifyApi.getMyTopTracks({ limit: 5, time_range: 'short_term' });
-    const topTracks = topTracksResponse.body.items.map((track) => track.name);
-    res.send(`Top Tracks: ${topTracks.join(', ')}`);
+    const topTracks = topTracksResponse.body.items.map((track) => ({
+      name: track.name,
+      url: track.external_urls.spotify,
+    }));
+    res.json(topTracks);
   } catch (error) {
     console.error('Error:', error.message);
     res.send('Error occurred. Check the console for details.');
-  }
-});
+  }});
 
+// End point to get set of saved playlists from the spotify api
 app.get('/savedplaylists', async (req, res) => {
   try {
     const savedPlaylistsResponse = await spotifyApi.getMySavedPlaylists({ limit: 5 });
-    const savedPlaylists = savedPlaylistsResponse.body.items.map((playlist) => playlist.name);
-    res.send(`Saved Playlists: ${savedPlaylists.join(', ')}`);
+    const savedPlaylists = savedPlaylistsResponse.body.items.map((playlist) => ({
+      name: playlist.name,
+      url: playlist.external_urls.spotify,
+    }));
+    res.json(savedPlaylists);
   } catch (error) {
     console.error('Error:', error.message);
     res.send('Error occurred. Check the console for details.');

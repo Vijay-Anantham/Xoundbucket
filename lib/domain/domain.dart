@@ -11,3 +11,17 @@ class user {
   late String name;
   late List<Songs> recentlistens;
 }
+
+class Playlist {
+  final String name;
+  final String url;
+
+  Playlist({required this.name, required this.url});
+
+  factory Playlist.fromJson(Map<String, dynamic> json) {
+    return Playlist(
+      name: json['name'] ?? '',
+      url: json['url'] ?? '',
+    );
+  }
+}
