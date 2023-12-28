@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xoundbucket/screens/songList.dart';
+import 'package:xoundbucket/screens/profile.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -44,7 +45,8 @@ class _LoginPageState extends State<LoginPage> {
               ElevatedButton(
                 onPressed: () {
                   // TODO: Implement login logic
-                  Navigator.push(context, MaterialPageRoute(builder: (ctx) => SongList()));
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (ctx) => Profile()));
                   print('Login clicked');
                 },
                 child: const Text('Login'),
