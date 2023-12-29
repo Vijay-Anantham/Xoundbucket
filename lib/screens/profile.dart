@@ -1,6 +1,8 @@
+import 'dart:html';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:url_launcher/url_launcher.dart';
@@ -26,26 +28,27 @@ class MyHomePage extends StatelessWidget {
   Future<void> launchLoginApi(String buttonName, BuildContext context) async {
     try {
       await launchUrl(Uri.parse(loginApiUrl));
-      final response =
-          await http.get(Uri.parse("http://localhost:3000/toptracks"));
-      if (response.statusCode == 200) {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (ctx) => SongList()));
-      }
+      chekForward(context);
     } catch (error) {
       print('Error: $error');
     }
   }
 
-  Future<bool> chekForward() async {
-    return false;
+  Future<void> chekForward(BuildContext context) async {
+    final response = await http.get(Uri.parse("http://localhost:3000/state"));
+    print(response.body);
+    if (response.body == "true") {
+      Navigator.push(context, MaterialPageRoute(builder: (ctx) => SongList()));
+    } else {
+      print("Await has been crossed improve the logic");
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Spotify Login Example'),
+        title: Text('Link platforms'),
       ),
       body: Center(
         child: Column(
@@ -53,15 +56,15 @@ class MyHomePage extends StatelessWidget {
           children: <Widget>[
             ElevatedButton(
               onPressed: () => launchLoginApi('Spotify', context),
-              child: Text('Login with Button 1'),
+              child: Text('Spotify'),
             ),
             ElevatedButton(
               onPressed: () => launchLoginApi('Button 2', context),
-              child: Text('Login with Button 2'),
+              child: Text('Amazon music'),
             ),
             ElevatedButton(
               onPressed: () => launchLoginApi('Button 3', context),
-              child: Text('Login with Button 3'),
+              child: Text('Apply music'),
             ),
           ],
         ),

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:xoundbucket/screens/profile.dart';
 import '/screens/login.dart' as sc;
 import 'package:flutter/widgets.dart';
-import './screens/profile.dart' as pf;
+import './screens/demo.dart' as pf;
 
 void main() {
   runApp(MaterialApp(
@@ -13,5 +13,5 @@ void main() {
       body: sc.LoginPage(),
     ),
   ));
-  // runApp(pf.Profile());
+  // runApp(pf.MyApp());
 }

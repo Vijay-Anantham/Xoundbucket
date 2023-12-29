@@ -9,6 +9,7 @@ const app = express();
 // CORS - Cross Origin Resource Sharing
 app.use(cors())
 const PORT = 3000;
+let authorized = false
 app.use(bodyParser.urlencoded({ extended: true }));
 const YOUR_CLIENT_ID = config.API_TOKEN;
 const YOUR_CLIENT_SECRET = config.API_SECRET;
@@ -27,6 +28,15 @@ app.get('/', (req, res) => {
   res.redirect(authorizeURL);
 });
 
+app.get('/state', (req, res) => {
+  try{
+    res.send(authorized)
+  }catch (error) {
+    console.error('Error:', error.message);
+    res.send('Error occurred. Check the console for details.');
+  }
+});
+
 // Home end point to get the authorization done
 app.get('/callback', async (req, res) => {
   const { code } = req.query;
@@ -36,7 +46,7 @@ app.get('/callback', async (req, res) => {
 
     spotifyApi.setAccessToken(access_token);
     spotifyApi.setRefreshToken(refresh_token);
-
+    authorized = true
     res.send('Authorization successful! Use /toptracks or /savedplaylists endpoint to get data.');
   } catch (error) {
     console.error('Error:', error.message);
