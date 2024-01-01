@@ -28,6 +28,7 @@ app.get('/', (req, res) => {
   res.redirect(authorizeURL);
 });
 
+// Sets the state of the application which can be called from the front end to decide on the flow
 app.get('/state', (req, res) => {
   try{
     res.send(authorized)
