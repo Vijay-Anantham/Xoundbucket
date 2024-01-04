@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const config = require('./config.json')
+const config = require('../config.json')
 const SpotifyWebApi = require('spotify-web-api-node');
 const cors = require('cors')
 
