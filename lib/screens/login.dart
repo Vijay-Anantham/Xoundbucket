@@ -45,6 +45,7 @@ class _LoginPageState extends State<LoginPage> {
               ElevatedButton(
                 onPressed: () {
                   // TODO: Implement login logic
+
                   Navigator.push(
                       context, MaterialPageRoute(builder: (ctx) => Profile()));
                   print('Login clicked');

@@ -1,16 +1,17 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const config = require('../config.json')
+// const express = require('express');
+// const bodyParser = require('body-parser');
+// const config = require('../config.json')
 const SpotifyWebApi = require('spotify-web-api-node');
-const cors = require('cors')
+// const cors = require('cors')
 
-const app = express();
+// const app = express();
 // FIXME: This has been added to enable communication between internal ports within the system
 // CORS - Cross Origin Resource Sharing
-app.use(cors())
-const PORT = 3000;
+// app.use(cors())
+// const PORT = 3000;
+// app.use(bodyParser.urlencoded({ extended: true }));
+
 let authorized = false
-app.use(bodyParser.urlencoded({ extended: true }));
 const YOUR_CLIENT_ID = config.API_TOKEN;
 const YOUR_CLIENT_SECRET = config.API_SECRET;
 // TODO: Currently it is local host it has to be hosted somewhere or add redirect to internal application page
@@ -23,7 +24,7 @@ const spotifyApi = new SpotifyWebApi({
   redirectUri: YOUR_REDIRECT_URI,
 });
 
-app.get('/', (req, res) => {
+app.get('/spotify', (req, res) => {
   const authorizeURL = spotifyApi.createAuthorizeURL(['user-top-read', 'playlist-read-private'], 'state');
   res.redirect(authorizeURL);
 });
@@ -84,6 +85,4 @@ app.get('/savedplaylists', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+

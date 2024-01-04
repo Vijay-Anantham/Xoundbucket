@@ -39,7 +39,7 @@ class Profile extends StatelessWidget {
 
 class MyHomePage extends StatelessWidget {
   final String loginApiUrl =
-      'http://localhost:3000/'; // Replace with your actual login API endpoint
+      'http://localhost:3000/spotify/spotifyconnect'; // Replace with your actual login API endpoint
 
   // Function that redirect to the internal api call
   Future<void> launchLoginApi(String buttonName, BuildContext context) async {
@@ -59,7 +59,8 @@ class MyHomePage extends StatelessWidget {
 
   // Function to check if the application page can be transitioned into next window
   Future<void> chekForward(BuildContext context) async {
-    final response = await http.get(Uri.parse("http://localhost:3000/state"));
+    final response =
+        await http.get(Uri.parse("http://localhost:3000/spotify/state"));
     // FIXME: This is sometimes causing flow mismatch bad ux sometimes.
     print(response.body);
     if (response.body == "true") {
