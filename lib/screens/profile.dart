@@ -50,7 +50,7 @@ class MyHomePage extends StatelessWidget {
         print("Url cannot be launched");
       }
       // FIXME: Right now we are using an await call but look for a way to make it more event driven
-      await Future.delayed(Duration(seconds: 1));
+      await Future.delayed(Duration(seconds: 2));
       chekForward(context);
     } catch (error) {
       print('Error: $error');

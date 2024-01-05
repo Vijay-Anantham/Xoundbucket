@@ -7,7 +7,8 @@ import '../widgets/songlistingtile.dart';
 import 'package:flutter/widgets.dart';
 
 Future<List<Playlist>> getsongs() async {
-  final response = await http.get(Uri.parse("http://localhost:3000/toptracks"));
+  final response =
+      await http.get(Uri.parse("http://localhost:3000/spotify/toptracks"));
   List<Songs> resultSongs = [];
   List<Playlist> playlists = [];
   if (response.statusCode == 200) {
