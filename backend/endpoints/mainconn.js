@@ -11,7 +11,9 @@ const app = express();
 app.use(cors())
 const PORT = 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(express.json({
+  type: ['application/json', 'text/plain']
+}))
 // Import endpoint routes
 const usersRoutes = require('./router/userRouter.js');
 const spotifyRoutes = require('./router/spotifyRouter.js');
